@@ -1,6 +1,7 @@
 package com.wonderland.sgl.service;
 
 import com.wonderland.sgl.dto.InsumoCalculadoDTO;
+import com.wonderland.sgl.dto.StaffRequeridoDTO;
 import com.wonderland.sgl.model.*;
 import com.wonderland.sgl.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +19,11 @@ public class CalculadoraLogisticaService {
     @Autowired private MenuPlatoRepository menuPlatoRepo;
     @Autowired private MenuBebidaRepository menuBebidaRepo;
     @Autowired private MenuPostreRepository menuPostreRepo;
-    
     @Autowired private RecetaPlatoRepository recetaPlatoRepo;
     @Autowired private RecetaBebidaRepository recetaBebidaRepo;
     @Autowired private RecetaPostreRepository recetaPostreRepo;
+    
+    @Autowired private MenuPersonajeRepository menuPersonajeRepo;
 
     public List<InsumoCalculadoDTO> calcularInsumosParaEvento(Integer idMenu, Integer cantNinos) {
         Map<String, InsumoCalculadoDTO> mapaInsumos = new HashMap<>();
@@ -66,5 +68,24 @@ public class CalculadoraLogisticaService {
         } else {
             mapa.put(clave, new InsumoCalculadoDTO(clave, insumo.getUnidadMedida(), subtotal));
         }
+    }
+
+    public List<StaffRequeridoDTO> calcularStaffParaEvento(Integer idMenu, Integer cantNinos) {
+        List<StaffRequeridoDTO> staff = new ArrayList<>();
+
+        int cantAnimadores = (int) Math.ceil(cantNinos / 15.0);
+        staff.add(new StaffRequeridoDTO("Animador", cantAnimadores));
+
+        int cantGarzones = (int) Math.ceil(cantNinos / 10.0);
+        staff.add(new StaffRequeridoDTO("Garzon", cantGarzones));
+
+        staff.add(new StaffRequeridoDTO("Cocinero", 1));
+
+        List<MenuPersonaje> personajesDelMenu = menuPersonajeRepo.findByMenuIdMenu(idMenu);
+        for (MenuPersonaje mp : personajesDelMenu) {
+            staff.add(new StaffRequeridoDTO("Actor/Actriz: " + mp.getPersonaje().getNombrePersonaje(), 1));
+        }
+
+        return staff;
     }
 }
