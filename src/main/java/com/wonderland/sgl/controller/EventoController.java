@@ -25,4 +25,9 @@ public class EventoController {
     public ResumenReservaDTO hacerReserva(@RequestBody ReservaRequestDTO request) {
         return service.procesarNuevaReserva(request);
     }
+
+    @DeleteMapping("/{id}")
+    public void eliminar(@PathVariable Integer id) {
+        service.eliminar(id);
+    }
 }

@@ -45,4 +45,8 @@ public class EventoService {
             staff
         );
     }
+
+    public void eliminar(Integer id) {
+        repo.deleteById(id);
+    }
 }
