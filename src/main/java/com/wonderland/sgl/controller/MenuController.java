@@ -12,4 +12,5 @@ public class MenuController {
     @Autowired private MenuService service;
     @GetMapping public List<Menu> listar() { return service.obtenerTodos(); }
     @PostMapping public Menu crear(@RequestBody Menu menu) { return service.crear(menu); }
+    @DeleteMapping("/{id}") public void eliminar(@PathVariable Integer id) { service.eliminar(id); }
 }

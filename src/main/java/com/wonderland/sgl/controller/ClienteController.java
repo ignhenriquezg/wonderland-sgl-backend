@@ -12,4 +12,5 @@ public class ClienteController {
     @Autowired private ClienteService service;
     @GetMapping public List<Cliente> listar() { return service.obtenerTodos(); }
     @PostMapping public Cliente crear(@RequestBody Cliente cliente) { return service.crear(cliente); }
+    @DeleteMapping("/{id}") public void eliminar(@PathVariable Integer id) { service.eliminar(id); }
 }

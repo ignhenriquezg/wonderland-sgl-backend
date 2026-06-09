@@ -10,4 +10,5 @@ public class MenuService {
     @Autowired private MenuRepository repo;
     public List<Menu> obtenerTodos() { return repo.findAll(); }
     public Menu crear(Menu menu) { return repo.save(menu); }
+    public void eliminar(Integer id) { repo.deleteById(id); }
 }
