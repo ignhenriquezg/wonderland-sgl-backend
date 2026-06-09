@@ -1,4 +1,5 @@
 package com.wonderland.sgl.controller;
+
 import com.wonderland.sgl.model.Personal;
 import com.wonderland.sgl.service.PersonalService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,8 @@ import java.util.List;
 @CrossOrigin(origins = "*")
 public class PersonalController {
     @Autowired private PersonalService service;
+    
     @GetMapping public List<Personal> listar() { return service.obtenerTodos(); }
     @PostMapping public Personal crear(@RequestBody Personal personal) { return service.crear(personal); }
+    @DeleteMapping("/{id}") public void eliminar(@PathVariable Integer id) { service.eliminar(id); }
 }

@@ -16,8 +16,11 @@ public class RolService {
         return rolRepository.findAll();
     }
 
-
     public Rol crearRol(Rol nuevoRol) {
         return rolRepository.save(nuevoRol); 
+    }
+
+    public void eliminar(Integer id) { 
+        rolRepository.deleteById(id); 
     }
 }

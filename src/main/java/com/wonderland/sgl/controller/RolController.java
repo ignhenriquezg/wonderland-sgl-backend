@@ -23,4 +23,9 @@ public class RolController {
     public Rol crear(@RequestBody Rol rol) {
         return rolService.crearRol(rol);
     }
+
+    @DeleteMapping("/{id}") 
+    public void eliminar(@PathVariable Integer id) { 
+        rolService.eliminar(id); 
+    }
 }
