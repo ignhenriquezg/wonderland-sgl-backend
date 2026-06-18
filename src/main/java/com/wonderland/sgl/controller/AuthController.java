@@ -24,7 +24,12 @@ public class AuthController {
 
         if (usuario != null && usuario.getPasswordHash().equals(request.getPassword())) {
             String token = jwtService.generarToken(usuario.getCorreo());
-            return ResponseEntity.ok(new LoginResponseDTO(token));
+            
+            // Extraemos el rol y el ID para que React sepa a dónde enviarlo
+            String nombreRol = usuario.getPersonal().getRol().getNombreRol();
+            Integer idPersonal = usuario.getPersonal().getIdPersonal();
+            
+            return ResponseEntity.ok(new LoginResponseDTO(token, nombreRol, idPersonal));
         }
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Correo o contraseña incorrectos");
     }

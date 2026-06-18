@@ -1,0 +1,1 @@
+ALTER TABLE Menu ADD COLUMN tipo_producto VARCHAR(30) DEFAULT 'Menú Completo';

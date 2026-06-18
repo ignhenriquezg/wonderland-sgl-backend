@@ -18,4 +18,8 @@ public class Insumo {
 
     @Column(name = "unidad_medida", nullable = false)
     private String unidadMedida;
+
+    // --- NUEVA COLUMNA DE INVENTARIO ---
+    @Column(name = "stock_actual", nullable = false)
+    private Double stockActual = 0.0;
 }
